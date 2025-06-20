@@ -51,21 +51,19 @@ class GeminiGUI:
         self.default_font.configure(family="Arial", size=11) # Increased default font size for readability
         self.bold_font = font.Font(family="Arial", size=12, weight="bold") # Increased bold font size
         
-        # --- API Configuration ---
         self.api_key = os.getenv("GEMINI_API_KEY")
+
         self.api_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={self.api_key}"
         self.headers = {'Content-Type': 'application/json'}
         
-        # --- Chat Management Variables ---
         self.all_conversations = [] 
         self.current_chat_index = -1 
         self.conversation_history = [] 
         
-        # --- Thinking Indicator Variables ---
-        self.thinking_frame = None  # Frame to hold the canvas for the spinner
-        self.thinking_canvas = None # Canvas for the spinning circle
-        self.animation_job = None   # Stores the ID of the scheduled animation job
-        self.angle = 0              # Current angle for the spinning line
+        self.thinking_frame = None  # 
+        self.thinking_canvas = None # 
+        self.animation_job = None   #
+        self.angle = 0              
 
         # --- Check for API Key ---
         if not self.api_key:
@@ -76,12 +74,9 @@ class GeminiGUI:
             self.root.destroy()
             sys.exit(1)
         
-        # --- Widget Creation ---
         self.create_main_layout()
         self.new_chat(initial_load=True) 
 
-        # --- Configure Text Tags for Chat Display ---
-        # Adjusted spacing to bring lines closer for better readability
         self.chat_display.tag_config('user', foreground=self.USER_COLOR, font=self.bold_font, spacing1=2, spacing3=2) 
         self.chat_display.tag_config('gemini', foreground=self.GEMINI_COLOR, spacing1=2, spacing3=2) 
         self.chat_display.tag_config('error', foreground=self.ERROR_COLOR, font=("Arial", 10, "italic"))
@@ -97,17 +92,14 @@ class GeminiGUI:
         paned_window = tk.PanedWindow(self.root, orient=tk.HORIZONTAL, sashwidth=5, bg=self.SEPARATOR_COLOR, relief=tk.FLAT)
         paned_window.pack(fill=tk.BOTH, expand=True)
 
-        # --- Left Panel ---
         left_panel = tk.Frame(paned_window, bg=self.LEFT_PANEL_BG, width=220)
         self.create_left_panel(left_panel)
         paned_window.add(left_panel, stretch="never")
 
-        # --- Right Panel ---
         right_panel = tk.Frame(paned_window, bg=self.BG_COLOR)
         self.create_right_panel(right_panel)
         paned_window.add(right_panel, stretch="always")
         
-        # Set initial size of the left panel
         paned_window.sash_place(0, 220, 0)
 
     def create_left_panel(self, parent):
@@ -472,7 +464,7 @@ class GeminiGUI:
         self.thinking_canvas.create_line(x1, y1, x2, y2, fill=self.SEND_BUTTON_COLOR, width=2, capstyle=tk.ROUND)
 
         self.angle = (self.angle + 15) % 360 
-      self.animation_job = self.root.after(80, self._animate_thinking_circle) # Schedule next frame
+        self.animation_job = self.root.after(80, self._animate_thinking_circle) # Schedule next frame
 
     def hide_thinking_indicator(self):
         """Hides and destroys the spinning circle indicator."""

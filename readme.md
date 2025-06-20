@@ -1,2 +1,2 @@
 # BetterGemini
-### Gemini client for linux
+### Gemini client for linux0-=po;l
