@@ -17,7 +17,6 @@ class GeminiGUI:
     A modern, Tkinter-based GUI for chatting with the Gemini API,
     inspired by a clean, two-panel layout.
     """
-    # --- Light Theme Color Palette ---
     BG_COLOR = "#F4F6F8"
     LEFT_PANEL_BG = "#FFFFFF"
     CHAT_BG_COLOR = "#FFFFFF"
@@ -65,7 +64,6 @@ class GeminiGUI:
         self.animation_job = None   #
         self.angle = 0              
 
-        # --- Check for API Key ---
         if not self.api_key:
             messagebox.showerror(
                 "API Key Error",
