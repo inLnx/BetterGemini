@@ -409,7 +409,7 @@ class GeminiGUI:
         payload = {"contents": self.conversation_history}
 
         try:
-            response = requests.post(self.api_url, headers=self.headers, data=json.dumps(payload), timeout=45)
+            response = requests.post(self.api_url, headers=self.headers, data=json.dumps(payload), timeout=75)
             response.raise_for_status()
             response_data = response.json()
             model_response = response_data['candidates'][0]['content']['parts'][0]['text']
