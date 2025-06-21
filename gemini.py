@@ -285,22 +285,18 @@ class GeminiGUI:
         elif role == 'user':
             prefix = "You: "
             self.chat_display.insert(tk.END, f"{prefix}{message_text}\n\n", (role,))
-        else: # For status, error etc.
+        else: 
             self.chat_display.insert(tk.END, f"{message_text}\n\n", (role,))
             
         self.chat_display.config(state='disabled')
         self.chat_display.see(tk.END)
-
-
     def display_message(self, who, message, tags=None):
         """
         Displays a message in the chat window with appropriate styling.
         This also handles hiding the thinking indicator.
         """
         self.hide_thinking_indicator()
-
         self.chat_display.config(state='normal')
-
         if who == 'gemini':
             self.chat_display.insert(tk.END, "Gemini: ", 'gemini')
             self._insert_gemini_parsed_message_content(message)
@@ -308,7 +304,6 @@ class GeminiGUI:
             prefix = "You: " if who == 'user' else "" # No prefix for status/error messages
             current_tags = tags if tags else (who,)
             self.chat_display.insert(tk.END, f"{prefix}{message}\n\n", current_tags)
-        
         self.chat_display.config(state='disabled')
         self.chat_display.see(tk.END)
 
@@ -319,21 +314,15 @@ class GeminiGUI:
         """
         last_idx = 0
         CODE_BLOCK_REGEX = re.compile(r"```(?P<lang>\w*)\s*\n(?P<code>.*?)\n```", re.DOTALL)
-
         for match in CODE_BLOCK_REGEX.finditer(message):
             if match.start() > last_idx:
                 self.chat_display.insert(tk.END, message[last_idx:match.start()], 'gemini')
-
             lang = match.group('lang')
             code_content = match.group('code').strip()
-
             self.chat_display.insert(tk.END, "\n", 'gemini') 
-
             if lang:
-                self.chat_display.insert(tk.END, f"Language: {lang}\n", 'code_lang')
-            
+                self.chat_display.insert(tk.END, f"Language: {lang}\n", 'code_lang') 
             self.chat_display.insert(tk.END, code_content + "\n", 'code_block')
-
             save_button = tk.Button(self.chat_display, text="Save Code to File",
                                     command=lambda c=code_content: self.save_code_to_file(c),
                                     bg=self.SEND_BUTTON_COLOR, fg="#ffffff",
@@ -341,14 +330,10 @@ class GeminiGUI:
                                     relief="flat", bd=0, padx=10, pady=5, cursor="hand2")
             self.chat_display.window_create(tk.END, window=save_button)
             self.chat_display.insert(tk.END, "\n\n", 'gemini') 
-            
             last_idx = match.end()
-
         if last_idx < len(message):
             self.chat_display.insert(tk.END, message[last_idx:], 'gemini')
-        
         self.chat_display.insert(tk.END, "\n", 'gemini')
-
     def save_code_to_file(self, code_content):
         """
         Prompts the user to save the provided code content to a file.
