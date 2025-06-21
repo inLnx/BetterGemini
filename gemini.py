@@ -153,9 +153,9 @@ class GeminiGUI:
 
         self.send_button = tk.Button(
             bottom_frame, text="Send", command=self.send_message_event, font=self.bold_font,
-            bg=self.SEND_BUTTON_COLOR, # New Google blue color
-            fg="#ffffff", # Text color explicitly white for contrast
-            activebackground=self.SEND_BUTTON_HOVER_COLOR, # New Google blue hover color
+            bg=self.SEND_BUTTON_COLOR, 
+            fg="#ffffff", 
+            activebackground=self.SEND_BUTTON_HOVER_COLOR, 
             activeforeground="#ffffff", relief="flat", bd=0, padx=25, pady=8, cursor="hand2"
         )
         self.send_button.grid(row=0, column=1, sticky="e")
@@ -263,7 +263,7 @@ class GeminiGUI:
                 text=chat_entry["title"],
                 command=lambda idx=i: self.load_chat_session(idx),
                 bg=button_bg, 
-                fg=button_fg, # Set foreground dynamically
+                fg=button_fg,
                 relief="flat", 
                 font=("Arial", 10), 
                 anchor="w",
@@ -362,7 +362,7 @@ class GeminiGUI:
                 ("Markdown files", "*.md"),
                 ("JavaScript files", "*.js"),
                 ("HTML files", "*.html"),
-                ("CSS files", "*.css")
+                ("CSS files", "*.css"),
                 ("JSON files", "*.json"),
                 ("XML files", "*.xml"),
                 ("Java files", "*.java"),
@@ -370,7 +370,7 @@ class GeminiGUI:
                 ("C++ files", "*.cpp"),
                 ("Ruby files", "*.rb"),
                 ("Go files", "*.go"),
-                ("PHP files", "*.php")
+                ("PHP files", "*.php"),
                 ("Shell scripts", "*.sh"),
                 ("SQL files", "*.sql"),
                 ("YAML files", "*.yaml"),
